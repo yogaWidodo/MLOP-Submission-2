@@ -1,7 +1,5 @@
 import argparse
-import argparse
 import mlflow
-import mlflow.keras
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
@@ -27,8 +25,8 @@ def define_model(units, dropout_rate, window_size):
     return model
 
 def main(args):
-    mlflow.set_tracking_uri("http://127.0.0.1:5000")
-    mlflow.set_experiment("LSTM Model for Gold Price Prediction")
+    # mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    # mlflow.set_experiment("LSTM Model for Gold Price Prediction")
 
     df = pd.read_csv('processed_gold_price.csv', parse_dates=['Date'])
 
@@ -54,11 +52,6 @@ def main(args):
         X_test.append(test_data[i-window_size:i, 0])
         y_test.append(test_data[i, 0])
 
-    X_train = np.array(X_train).reshape(-1, window_size, 1)
-    X_test  = np.array(X_test).reshape(-1, window_size, 1)
-    y_train = np.array(y_train).reshape(-1, 1)
-    y_test  = np.array(y_test).reshape(-1, 1)
-
     # if mlflow.active_run() is None:
     #     run = mlflow.start_run()
     # else:
@@ -72,12 +65,12 @@ def main(args):
     mlflow.log_param("dropout_rate", args.dropout_rate)
 
     model = define_model(args.units, args.dropout_rate, window_size)
-    mlflow.autolog()
-    mlflow.keras.log_model(
-        model,
-        artifact_path="model",
-        registered_model_name="LSTM_Gold_Price_Prediction_Model",
-    )
+    # mlflow.autolog()
+    # mlflow.keras.log_model(
+    #     model,
+    #     artifact_path="model",
+    #     registered_model_name="LSTM_Gold_Price_Prediction_Model",
+    # )
     history = model.fit(
         X_train, y_train,
         epochs=args.epochs,
