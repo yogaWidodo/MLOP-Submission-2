@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/766704197309562462/43859368c8fa4784a3825e1ee7db01f4/artifacts
+end_time: 1748932795008
+entry_point_name: ''
+experiment_id: '766704197309562462'
+lifecycle_stage: active
+run_id: 43859368c8fa4784a3825e1ee7db01f4
+run_name: carefree-snake-234
+run_uuid: 43859368c8fa4784a3825e1ee7db01f4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748932435910
+status: 3
+tags: []
+user_id: chain

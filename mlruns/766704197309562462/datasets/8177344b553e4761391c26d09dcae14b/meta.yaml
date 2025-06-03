@@ -1,0 +1,10 @@
+digest: 460f09a3
+name: dataset
+profile: '{"features_shape": [2263, 60, 1], "features_size": 135780, "features_nbytes":
+  1086240, "targets_shape": [2263, 1], "targets_size": 2263, "targets_nbytes": 18104}'
+schema: '{"mlflow_tensorspec": {"features": "[{\"type\": \"tensor\", \"tensor-spec\":
+  {\"dtype\": \"float64\", \"shape\": [-1, 60, 1]}}]", "targets": "[{\"type\": \"tensor\",
+  \"tensor-spec\": {\"dtype\": \"float64\", \"shape\": [-1, 1]}}]"}}'
+source: '{"tags": {"mlflow.user": "chain", "mlflow.source.name": "c:/Users/chain/Downloads/Mlops-docker/modelling.py",
+  "mlflow.source.type": "LOCAL"}}'
+source_type: code

@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/766704197309562462
+creation_time: 1748932239070
+experiment_id: '766704197309562462'
+last_update_time: 1748932239070
+lifecycle_stage: active
+name: LSTM Model for Gold Price Prediction

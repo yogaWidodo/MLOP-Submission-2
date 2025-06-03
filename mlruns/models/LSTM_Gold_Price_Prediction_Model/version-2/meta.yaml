@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1748936917303
+current_stage: None
+description: ''
+last_updated_timestamp: 1748936917303
+name: LSTM_Gold_Price_Prediction_Model
+run_id: cd46b5713b3a40d7853ecc82b92f0cf6
+run_link: ''
+source: mlflow-artifacts:/766704197309562462/cd46b5713b3a40d7853ecc82b92f0cf6/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/766704197309562462/cd46b5713b3a40d7853ecc82b92f0cf6/artifacts/model
+user_id: null
+version: 2

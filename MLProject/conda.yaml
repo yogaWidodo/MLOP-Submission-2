@@ -1,0 +1,14 @@
+name: lstm_gold_price_prediction
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - mlflow
+      - tensorflow
+      - keras
+      - pandas
+      - numpy
+      - scikit-learn
