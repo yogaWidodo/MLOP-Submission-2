@@ -59,10 +59,10 @@ def main(args):
     y_train = np.array(y_train).reshape(-1, 1)
     y_test  = np.array(y_test).reshape(-1, 1)
 
-    if mlflow.active_run() is None:
-        run = mlflow.start_run()
-    else:
-        run = mlflow.active_run()
+    # if mlflow.active_run() is None:
+    #     run = mlflow.start_run()
+    # else:
+    #     run = mlflow.active_run()
 
     mlflow.log_param("window_size", window_size)
     mlflow.log_param("test_size", test_size)
