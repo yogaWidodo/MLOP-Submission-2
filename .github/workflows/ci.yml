@@ -25,9 +25,7 @@ jobs:
         use-mamba: true
 
     - name: Install MLflow
-      run: |
-        conda activate lstm_gold_price_prediction
-        pip install mlflow
+      run: conda run -n lstm_gold_price_prediction pip install mlflow
 
     - name: Run MLflow project
       run: |
