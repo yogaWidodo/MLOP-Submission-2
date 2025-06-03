@@ -41,10 +41,7 @@ def main(args):
     train_data = df.Price[:-test_size]
     train_data = scaler.transform(train_data.values.reshape(-1,1))
 
-    X_train = []
-    y_train = []
-    X_test = []
-    y_test = []
+    X_train, y_train, X_test, y_test = [], [], [], []
 
     for i in range(window_size, len(train_data)):
         X_train.append(train_data[i-window_size:i, 0])
@@ -57,37 +54,42 @@ def main(args):
         X_test.append(test_data[i-window_size:i, 0])
         y_test.append(test_data[i, 0])
 
-    X_train = np.array(X_train)
-    X_test  = np.array(X_test)
-    y_train = np.array(y_train)
-    y_test  = np.array(y_test)
+    X_train = np.array(X_train).reshape(-1, window_size, 1)
+    X_test  = np.array(X_test).reshape(-1, window_size, 1)
+    y_train = np.array(y_train).reshape(-1, 1)
+    y_test  = np.array(y_test).reshape(-1, 1)
 
-    X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
-    X_test  = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
-    y_train = np.reshape(y_train, (-1,1))
-    y_test  = np.reshape(y_test, (-1,1))
+    if mlflow.active_run() is None:
+        run = mlflow.start_run()
+    else:
+        run = mlflow.active_run()
 
-    with mlflow.start_run():
-        mlflow.log_param("window_size", window_size)
-        mlflow.log_param("test_size", test_size)
-        mlflow.log_param("epochs", args.epochs)
-        mlflow.log_param("batch_size", args.batch_size)
-        mlflow.log_param("units", args.units)
-        mlflow.log_param("dropout_rate", args.dropout_rate)
+    mlflow.log_param("window_size", window_size)
+    mlflow.log_param("test_size", test_size)
+    mlflow.log_param("epochs", args.epochs)
+    mlflow.log_param("batch_size", args.batch_size)
+    mlflow.log_param("units", args.units)
+    mlflow.log_param("dropout_rate", args.dropout_rate)
 
-        model = define_model(args.units, args.dropout_rate, window_size)
-        mlflow.autolog()
-        mlflow.keras.log_model(
-            model,
-            artifact_path="model",
-            registered_model_name="LSTM_Gold_Price_Prediction_Model",
-        )
-        history = model.fit(X_train, y_train, epochs=args.epochs, batch_size=args.batch_size, validation_split=0.1, verbose='1')
-        y_pred = model.predict(X_test)
-        MAPE = mean_absolute_percentage_error(y_test, y_pred)
-        Accuracy = 1 - MAPE
-        mlflow.log_metric("MAPE", float(MAPE))
-        mlflow.log_metric("Accuracy", float(Accuracy))
+    model = define_model(args.units, args.dropout_rate, window_size)
+    mlflow.autolog()
+    mlflow.keras.log_model(
+        model,
+        artifact_path="model",
+        registered_model_name="LSTM_Gold_Price_Prediction_Model",
+    )
+    history = model.fit(
+        X_train, y_train,
+        epochs=args.epochs,
+        batch_size=args.batch_size,
+        validation_split=0.1,
+        verbose=1
+    )
+    y_pred = model.predict(X_test)
+    MAPE = mean_absolute_percentage_error(y_test, y_pred)
+    Accuracy = 1 - MAPE
+    mlflow.log_metric("MAPE", float(MAPE))
+    mlflow.log_metric("Accuracy", float(Accuracy))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train LSTM model for gold price prediction')
