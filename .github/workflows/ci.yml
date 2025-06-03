@@ -28,6 +28,4 @@ jobs:
       run: conda run -n lstm_gold_price_prediction pip install mlflow
 
     - name: Run MLflow project
-      run: |
-        conda activate lstm_gold_price_prediction
-        mlflow run MLProject --no-conda
+      run: conda run -n lstm_gold_price_prediction mlflow run MLProject --no-conda
