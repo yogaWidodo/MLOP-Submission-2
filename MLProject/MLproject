@@ -11,4 +11,4 @@ entry_points:
       batch_size: {type: int, default: 32}
       window_size: {type: int, default: 60}
     command: >
-      bash -c "cd \"$MLFLOW_PROJECT_DIR\" && python \MLProject\modelling.py\" --units {units} --dropout_rate {dropout_rate} --epochs {epochs} --batch_size {batch_size} --window_size {window_size}"
+      python modelling.py --units {units} --dropout_rate {dropout_rate} --epochs {epochs} --batch_size {batch_size} --window_size {window_size}
