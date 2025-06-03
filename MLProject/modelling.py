@@ -30,7 +30,7 @@ def main(args):
     mlflow.set_tracking_uri("http://127.0.0.1:5000")
     mlflow.set_experiment("LSTM Model for Gold Price Prediction")
 
-    df = pd.read_csv('MLProject/processed_gold_price.csv', parse_dates=['Date'])
+    df = pd.read_csv('processed_gold_price.csv', parse_dates=['Date'])
 
     test_size = df[df.Date.dt.year==2022].shape[0]
     scaler = MinMaxScaler()
