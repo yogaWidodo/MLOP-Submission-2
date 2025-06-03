@@ -52,6 +52,11 @@ def main(args):
         X_test.append(test_data[i-window_size:i, 0])
         y_test.append(test_data[i, 0])
 
+    X_train = np.array(X_train).reshape(-1, window_size, 1)
+    y_train = np.array(y_train).reshape(-1, 1)
+    X_test = np.array(X_test).reshape(-1, window_size, 1)
+    y_test = np.array(y_test).reshape(-1, 1)
+
     # if mlflow.active_run() is None:
     #     run = mlflow.start_run()
     # else:
